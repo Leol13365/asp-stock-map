@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - 我的 ASP.NET 應用程式</title>
@@ -24,6 +24,18 @@
                     <li>@Html.ActionLink("首頁", "Index", "Home")</li>
                     <li>@Html.ActionLink("關於", "About", "Home")</li>
                     <li>@Html.ActionLink("連絡人", "Contact", "Home")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    @if (Session["account"] == null || string.IsNullOrWhiteSpace(Session["account"].ToString()))
+                    {
+                        <li><a href="/Auth/Login/">登入</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="#">Hi @(Session["account"])</a></li>
+                        <li><a href="/Auth/Logout/">登出</a></li>
+                    }
                 </ul>
             </div>
         </div>

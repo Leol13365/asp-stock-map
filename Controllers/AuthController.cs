@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -28,7 +28,8 @@ namespace StockMap.Controllers
             if (ModelState.IsValid)
             {
                 var user = db.Users.Where(m => m.Account == data.Account).FirstOrDefault();
-                if(user == null){
+                if (user == null)
+                {
                     ModelState.AddModelError(nameof(data.Account), "此帳號不存在，請先註冊");
                     return View(data);
                 }
@@ -37,10 +38,18 @@ namespace StockMap.Controllers
                     ModelState.AddModelError(nameof(data.Password), "密碼錯誤");
                     return View(data);
                 }
-                return RedirectToAction("Index");
+                Session["account"] = data.Account;
+                return RedirectToAction("Register");
             }
 
             return View(data);
+        }
+
+        // GET: Auth/Logout
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Register");
         }
 
         // GET: Auth/Register
@@ -57,9 +66,10 @@ namespace StockMap.Controllers
             if (ModelState.IsValid)
             {
                 var user = db.Users.Where(m => m.Account == data.Account).FirstOrDefault();
-                if(user != null) {
+                if (user != null)
+                {
                     ModelState.AddModelError(nameof(data.Account), "此帳號已有人使用");
-                    return View(data); 
+                    return View(data);
                 }
                 db.Users.Add(data);
                 db.SaveChanges();
