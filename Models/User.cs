@@ -18,13 +18,13 @@ namespace StockMap.Models
         [Key]
         [Required]
         [StringLength(20)]
-        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "¶È¯à¥]§t­^¤å¦r¥À¥H¤Î¼Æ¦r")]
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "ï¿½È¯ï¿½]ï¿½tï¿½^ï¿½ï¿½rï¿½ï¿½ï¿½Hï¿½Î¼Æ¦r")]
         public string Account { get; set; }
 
         [Required]
         [StringLength(20)]
         [DataType(DataType.Password)]
-        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "¶È¯à¥]§t­^¤å¦r¥À¥H¤Î¼Æ¦r")]
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "ï¿½È¯ï¿½]ï¿½tï¿½^ï¿½ï¿½rï¿½ï¿½ï¿½Hï¿½Î¼Æ¦r")]
         public string Password { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -38,8 +38,8 @@ namespace StockMap.Models
         [Required]
         [StringLength(20)]
         [DataType(DataType.Password)]
-        [Compare(nameof(Password), ErrorMessage = "¥²»Ý»PPasswordªº­È¬Û¦P")]
-        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "¶È¯à¥]§t­^¤å¦r¥À¥H¤Î¼Æ¦r")]
+        [Compare(nameof(Password), ErrorMessage = "ï¿½ï¿½ï¿½Ý»PPasswordï¿½ï¿½ï¿½È¬Û¦P")]
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "ï¿½È¯ï¿½]ï¿½tï¿½^ï¿½ï¿½rï¿½ï¿½ï¿½Hï¿½Î¼Æ¦r")]
         public string ConfirmedPassword { get; set; }
     }
 

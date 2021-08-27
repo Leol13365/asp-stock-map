@@ -19,7 +19,6 @@ namespace StockMap.Models
         public virtual DbSet<StockTech> StockTeches { get; set; }
         public virtual DbSet<StockTrade> StockTrades { get; set; }
         public virtual DbSet<StockYesterday> StockYesterdays { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -82,19 +81,83 @@ namespace StockMap.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<StockTech>()
-                .Property(e => e.Stock5MA)
+                .Property(e => e.Day1)
                 .HasPrecision(16, 2);
 
             modelBuilder.Entity<StockTech>()
-                .Property(e => e.Stock10MA)
+                .Property(e => e.Day2)
                 .HasPrecision(16, 2);
 
             modelBuilder.Entity<StockTech>()
-                .Property(e => e.Stock20MA)
+                .Property(e => e.Day3)
                 .HasPrecision(16, 2);
 
             modelBuilder.Entity<StockTech>()
-                .Property(e => e.Stock60MA)
+                .Property(e => e.Day4)
+                .HasPrecision(16, 2);
+
+            modelBuilder.Entity<StockTech>()
+                .Property(e => e.Day5)
+                .HasPrecision(16, 2);
+
+            modelBuilder.Entity<StockTech>()
+                .Property(e => e.Day6)
+                .HasPrecision(16, 2);
+
+            modelBuilder.Entity<StockTech>()
+                .Property(e => e.Day7)
+                .HasPrecision(16, 2);
+
+            modelBuilder.Entity<StockTech>()
+                .Property(e => e.Day8)
+                .HasPrecision(16, 2);
+
+            modelBuilder.Entity<StockTech>()
+                .Property(e => e.Day9)
+                .HasPrecision(16, 2);
+
+            modelBuilder.Entity<StockTech>()
+                .Property(e => e.Day10)
+                .HasPrecision(16, 2);
+
+            modelBuilder.Entity<StockTech>()
+                .Property(e => e.Day11)
+                .HasPrecision(16, 2);
+
+            modelBuilder.Entity<StockTech>()
+                .Property(e => e.Day12)
+                .HasPrecision(16, 2);
+
+            modelBuilder.Entity<StockTech>()
+                .Property(e => e.Day13)
+                .HasPrecision(16, 2);
+
+            modelBuilder.Entity<StockTech>()
+                .Property(e => e.Day14)
+                .HasPrecision(16, 2);
+
+            modelBuilder.Entity<StockTech>()
+                .Property(e => e.Day15)
+                .HasPrecision(16, 2);
+
+            modelBuilder.Entity<StockTech>()
+                .Property(e => e.Day16)
+                .HasPrecision(16, 2);
+
+            modelBuilder.Entity<StockTech>()
+                .Property(e => e.Day17)
+                .HasPrecision(16, 2);
+
+            modelBuilder.Entity<StockTech>()
+                .Property(e => e.Day18)
+                .HasPrecision(16, 2);
+
+            modelBuilder.Entity<StockTech>()
+                .Property(e => e.Day19)
+                .HasPrecision(16, 2);
+
+            modelBuilder.Entity<StockTech>()
+                .Property(e => e.Day20)
                 .HasPrecision(16, 2);
 
             modelBuilder.Entity<StockTrade>()

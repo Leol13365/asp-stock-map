@@ -13,17 +13,15 @@ namespace StockMap.Models
         [StringLength(20)]
         public string StockId { get; set; }
 
-        public int StockFINB { get; set; }
+        public int StockFINBS { get; set; }
 
-        public int StockFINS { get; set; }
+        public int StockTCNBS { get; set; }
 
-        public int StockTCNB { get; set; }
+        public int StockDNBSSelf { get; set; }
 
-        public int StockTCNS { get; set; }
+        public int StockDNBSRisk { get; set; }
 
-        public int StockDNB { get; set; }
-
-        public int StockDNS { get; set; }
+        public int ThreeSellBuy { get; set; }
 
         public virtual Stock Stock { get; set; }
     }
