@@ -1,0 +1,53 @@
+﻿@*@using MultipleModelInOneView;*@
+@model List<StockMap.Models.FavoriteViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            A
+        </th>
+        <th>
+            B
+        </th>
+        <th>
+            C
+        </th>
+        <th>
+            D
+        </th>
+        <th>
+            E
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Stock.Id, "Details", new { id = item.Id })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock.FavoriteCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockTrade.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

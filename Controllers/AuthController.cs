@@ -39,7 +39,7 @@ namespace StockMap.Controllers
                     return View(data);
                 }
                 Session["account"] = data.Account;
-                return RedirectToAction("Register");
+                return RedirectToAction("Index", "Favorites");
             }
 
             return View(data);
@@ -49,7 +49,7 @@ namespace StockMap.Controllers
         public ActionResult Logout()
         {
             Session.Clear();
-            return RedirectToAction("Register");
+            return RedirectToAction("Login");
         }
 
         // GET: Auth/Register

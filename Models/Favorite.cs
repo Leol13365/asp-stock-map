@@ -23,4 +23,10 @@ namespace StockMap.Models
 
         public virtual User User { get; set; }
     }
+
+    [NotMapped]
+    public partial class FavoriteViewModel : Favorite
+    {
+        public virtual StockTrade StockTrade { get; set; }
+    }
 }
