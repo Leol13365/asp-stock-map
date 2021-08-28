@@ -46,6 +46,7 @@ namespace StockMap.Controllers
         }
 
         // GET: Auth/Logout
+        [SessionAuth]
         public ActionResult Logout()
         {
             Session.Clear();

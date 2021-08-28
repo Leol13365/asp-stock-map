@@ -11,6 +11,7 @@ using StockMap.Models;
 
 namespace StockMap.Controllers
 {
+    [SessionAuth]
     public class FavoritesController : Controller
     {
         private StockMapDbContext db = new StockMapDbContext();
@@ -19,7 +20,7 @@ namespace StockMap.Controllers
         public ActionResult Index()
         {
             List<FavoriteViewModel> mymodel = new List<FavoriteViewModel>();
-            var userAccount = Session["account"] != null ? Session["account"].ToString() : null;
+            var userAccount = Session["account"].ToString();
             var stockTrades = db.StockTrades.ToList();
             var favorites = db.Favorites
                 .Include(f => f.Stock)
