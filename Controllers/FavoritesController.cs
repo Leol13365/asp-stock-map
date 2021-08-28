@@ -19,7 +19,7 @@ namespace StockMap.Controllers
         public ActionResult Index()
         {
             List<FavoriteViewModel> mymodel = new List<FavoriteViewModel>();
-            var userAccount = Session["account"].ToString();
+            var userAccount = Session["account"] != null ? Session["account"].ToString() : null;
             var stockTrades = db.StockTrades.ToList();
             var favorites = db.Favorites
                 .Include(f => f.Stock)
@@ -80,41 +80,6 @@ namespace StockMap.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.StockId = new SelectList(db.Stocks, "Id", "Name", favorite.StockId);
-            ViewBag.UserAccount = new SelectList(db.Users, "Account", "Password", favorite.UserAccount);
-            return View(favorite);
-        }
-
-        // GET: Favorites/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Favorite favorite = db.Favorites.Find(id);
-            if (favorite == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.StockId = new SelectList(db.Stocks, "Id", "Name", favorite.StockId);
-            ViewBag.UserAccount = new SelectList(db.Users, "Account", "Password", favorite.UserAccount);
-            return View(favorite);
-        }
-
-        // POST: Favorites/Edit/5
-        // 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
-        // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserAccount,StockId")] Favorite favorite)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(favorite).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
             ViewBag.StockId = new SelectList(db.Stocks, "Id", "Name", favorite.StockId);
             ViewBag.UserAccount = new SelectList(db.Users, "Account", "Password", favorite.UserAccount);
             return View(favorite);

@@ -186,7 +186,6 @@
     <Content Include="Views\Favorites\Create.cshtml" />
     <Content Include="Views\Favorites\Delete.cshtml" />
     <Content Include="Views\Favorites\Details.cshtml" />
-    <Content Include="Views\Favorites\Edit.cshtml" />
     <Content Include="Views\Favorites\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
