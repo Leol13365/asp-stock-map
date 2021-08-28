@@ -18,13 +18,13 @@ namespace StockMap.Models
         [Key]
         [Required]
         [StringLength(20)]
-        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "�ȯ�]�t�^��r���H�μƦr")]
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "僅能有英文以及數字")]
         public string Account { get; set; }
 
         [Required]
         [StringLength(20)]
         [DataType(DataType.Password)]
-        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "�ȯ�]�t�^��r���H�μƦr")]
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "僅能有英文以及數字")]
         public string Password { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -38,8 +38,8 @@ namespace StockMap.Models
         [Required]
         [StringLength(20)]
         [DataType(DataType.Password)]
-        [Compare(nameof(Password), ErrorMessage = "���ݻPPassword���ȬۦP")]
-        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "�ȯ�]�t�^��r���H�μƦr")]
+        [Compare(nameof(Password), ErrorMessage = "必須與Password相同")]
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "僅能有英文以及數字")]
         public string ConfirmedPassword { get; set; }
     }
 

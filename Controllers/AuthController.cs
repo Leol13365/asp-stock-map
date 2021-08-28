@@ -72,7 +72,7 @@ namespace StockMap.Controllers
                     ModelState.AddModelError(nameof(data.Account), "此帳號已有人使用");
                     return View(data);
                 }
-                db.Users.Add(data);
+                db.Users.Add(new User { Account = data.Account, Password = data.Password });
                 db.SaveChanges();
                 return RedirectToAction("Login");
             }
