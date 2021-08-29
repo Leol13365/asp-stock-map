@@ -19,29 +19,13 @@ namespace StockMap.Controllers
         // GET: Favorites
         public ActionResult Index()
         {
-            List<FavoriteViewModel> mymodel = new List<FavoriteViewModel>();
             var userAccount = Session["account"].ToString();
-            var stockTrades = db.StockTrades.ToList();
             var favorites = db.Favorites
                 .Include(f => f.Stock)
                 .Include(f => f.User)
                 .Where(m => m.UserAccount == userAccount)
-                .ToList()
-                .Join(
-                stockTrades,
-                favorite => favorite.StockId,
-                stockTrade => stockTrade.StockId,
-                (favorite, stockTrade) => new FavoriteViewModel
-                {
-                    Id = favorite.Id,
-                    UserAccount = favorite.UserAccount,
-                    StockId = favorite.StockId,
-                    Stock = favorite.Stock,
-                    User = favorite.User,
-                    StockTrade = stockTrade
-                }).ToList();
-            mymodel = favorites;
-            return View(mymodel);
+                .ToList();
+            return View(favorites);
         }
 
         // GET: Favorites/Details/5

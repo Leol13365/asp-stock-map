@@ -1,5 +1,4 @@
-﻿@*@using MultipleModelInOneView;*@
-@model List<StockMap.Models.FavoriteViewModel>
+﻿@model IEnumerable<StockMap.Models.Favorite>
 
 @{
     ViewBag.Title = "Index";
@@ -13,16 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model[0].StockId)
+            @Html.DisplayNameFor(model => model.StockId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model[0].Stock.Name)
+            @Html.DisplayNameFor(model => model.Stock.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model[0].Stock.FavoriteCount)
+            @Html.DisplayNameFor(model => model.Stock.FavoriteCount)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model[0].StockTrade.Price)
+            @Html.DisplayNameFor(model => model.Stock.Price)
         </th>
         <th>
         </th>
@@ -41,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.Stock.FavoriteCount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StockTrade.Price)
+                @Html.DisplayFor(modelItem => item.Stock.Price)
             </td>
             <td>
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
