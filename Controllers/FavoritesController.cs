@@ -46,28 +46,37 @@ namespace StockMap.Controllers
         // GET: Favorites/Create
         public ActionResult Create()
         {
-            ViewBag.StockId = new SelectList(db.Stocks, "Id", "Name");
-            ViewBag.UserAccount = new SelectList(db.Users, "Account", "Password");
             return View();
         }
 
         // POST: Favorites/Create
-        // 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
-        // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserAccount,StockId")] Favorite favorite)
+        public ActionResult Create([Bind(Include = "StockId")] Favorite data)
         {
             if (ModelState.IsValid)
             {
-                db.Favorites.Add(favorite);
+                var userAccount = Session["account"].ToString();
+
+                var stock = db.Stocks.Where(m => m.Id == data.StockId).FirstOrDefault();
+                if (stock == null)
+                {
+                    ModelState.AddModelError(nameof(data.StockId), "此股票不存在");
+                    return View(data);
+                }
+
+                var favorite = db.Favorites.Where(m => m.StockId == data.StockId && m.UserAccount == userAccount).FirstOrDefault();
+                if (favorite != null)
+                {
+                    ModelState.AddModelError(nameof(data.StockId), "此股票已在收藏內");
+                    return View(data);
+                }
+
+                db.Favorites.Add(new Favorite { UserAccount = userAccount, StockId = data.StockId });
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.StockId = new SelectList(db.Stocks, "Id", "Name", favorite.StockId);
-            ViewBag.UserAccount = new SelectList(db.Users, "Account", "Password", favorite.UserAccount);
-            return View(favorite);
+            return View(data);
         }
 
         // GET: Favorites/Delete/5

@@ -1,46 +1,35 @@
 ﻿@model StockMap.Models.Favorite
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "新增收藏股票";
 }
 
-<h2>Create</h2>
+<h2>新增收藏股票</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Favorite</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.UserAccount, "UserAccount", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">請輸入股票代碼：</label>
             <div class="col-md-10">
-                @Html.DropDownList("UserAccount", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.UserAccount, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.StockId, "StockId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("StockId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.EditorFor(model => model.StockId, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.StockId, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="新增" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("回到收藏列表", "Index")
 </div>
 
 @section Scripts {

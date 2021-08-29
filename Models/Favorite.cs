@@ -11,12 +11,12 @@ namespace StockMap.Models
     {
         public int Id { get; set; }
 
-        [Required]
         [StringLength(20)]
         public string UserAccount { get; set; }
 
         [Required]
         [StringLength(20)]
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "請輸入正確的股票代碼格式")]
         public string StockId { get; set; }
 
         public virtual Stock Stock { get; set; }
