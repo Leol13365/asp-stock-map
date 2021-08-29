@@ -24,6 +24,16 @@ namespace StockMap.Models
 
         public int FavoriteCount { get; set; }
 
+        public int SSell { get; set; }
+
+        public int SBuy { get; set; }
+
+        public decimal Price { get; set; }
+
+        public DateTime CreateTime { get; set; }
+
+        public DateTime UpdateTime { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Favorite> Favorites { get; set; }
 
@@ -32,8 +42,6 @@ namespace StockMap.Models
         public virtual StockFound StockFound { get; set; }
 
         public virtual StockTech StockTech { get; set; }
-
-        public virtual StockTrade StockTrade { get; set; }
 
         public virtual StockYesterday StockYesterday { get; set; }
     }

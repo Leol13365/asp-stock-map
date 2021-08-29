@@ -17,7 +17,6 @@ namespace StockMap.Models
         public virtual DbSet<StockChip> StockChips { get; set; }
         public virtual DbSet<StockFound> StockFounds { get; set; }
         public virtual DbSet<StockTech> StockTeches { get; set; }
-        public virtual DbSet<StockTrade> StockTrades { get; set; }
         public virtual DbSet<StockYesterday> StockYesterdays { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
@@ -30,6 +29,10 @@ namespace StockMap.Models
             modelBuilder.Entity<Stock>()
                 .Property(e => e.Id)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Stock>()
+                .Property(e => e.Price)
+                .HasPrecision(16, 2);
 
             modelBuilder.Entity<Stock>()
                 .HasMany(e => e.Favorites)
@@ -46,10 +49,6 @@ namespace StockMap.Models
 
             modelBuilder.Entity<Stock>()
                 .HasOptional(e => e.StockTech)
-                .WithRequired(e => e.Stock);
-
-            modelBuilder.Entity<Stock>()
-                .HasOptional(e => e.StockTrade)
                 .WithRequired(e => e.Stock);
 
             modelBuilder.Entity<Stock>()
@@ -158,14 +157,6 @@ namespace StockMap.Models
 
             modelBuilder.Entity<StockTech>()
                 .Property(e => e.Day20)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTrade>()
-                .Property(e => e.StockId)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<StockTrade>()
-                .Property(e => e.Price)
                 .HasPrecision(16, 2);
 
             modelBuilder.Entity<StockYesterday>()
