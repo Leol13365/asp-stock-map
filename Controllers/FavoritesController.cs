@@ -82,23 +82,6 @@ namespace StockMap.Controllers
         // GET: Favorites/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Favorite favorite = db.Favorites.Find(id);
-            if (favorite == null)
-            {
-                return HttpNotFound();
-            }
-            return View(favorite);
-        }
-
-        // POST: Favorites/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
             Favorite favorite = db.Favorites.Find(id);
             db.Favorites.Remove(favorite);
             db.SaveChanges();

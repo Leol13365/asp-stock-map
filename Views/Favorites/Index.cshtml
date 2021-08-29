@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<StockMap.Models.Favorite>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "收藏股票";
 }
 
-<h2>Index</h2>
+<h2>收藏股票</h2>
 
 <p>
     @Html.ActionLink("新增收藏股票", "Create")
@@ -43,7 +43,7 @@
                 @Html.DisplayFor(modelItem => item.Stock.Price)
             </td>
             <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("移除", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }
