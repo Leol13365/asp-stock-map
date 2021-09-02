@@ -25,40 +25,19 @@ namespace StockMap.Controllers
                 .Include(f => f.User)
                 .Where(m => m.UserAccount == userAccount)
                 .ToList();
-            return View(favorites);
+            var model = new Favorite() { FavoriteIndex = favorites };
+            return View(model);
         }
 
-        // GET: Favorites/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Favorite favorite = db.Favorites.Find(id);
-            if (favorite == null)
-            {
-                return HttpNotFound();
-            }
-            return View(favorite);
-        }
-
-        // GET: Favorites/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Favorites/Create
+        // POST: Favorites/Index
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StockId")] Favorite data)
+        public ActionResult Index([Bind(Include = "StockId")] Favorite data)
         {
             if (ModelState.IsValid)
             {
                 var userAccount = Session["account"].ToString();
-
-                var stock = db.Stocks.Where(m => m.Id == data.StockId).FirstOrDefault();
+                var stock = db.Stocks.Where(m => m.StockId == data.StockId).FirstOrDefault();
                 if (stock == null)
                 {
                     ModelState.AddModelError(nameof(data.StockId), "此股票不存在");
@@ -77,6 +56,21 @@ namespace StockMap.Controllers
                 return RedirectToAction("Index");
             }
             return View(data);
+        }
+
+        // GET: Favorites/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Favorite favorite = db.Favorites.Find(id);
+            if (favorite == null)
+            {
+                return HttpNotFound();
+            }
+            return View(favorite);
         }
 
         // GET: Favorites/Delete/5

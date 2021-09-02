@@ -140,7 +140,6 @@
     </Compile>
     <Compile Include="Helpers\SessionAuth.cs" />
     <Compile Include="Models\Favorite.cs" />
-    <Compile Include="Models\FavoriteViewModel.cs" />
     <Compile Include="Models\Stock.cs" />
     <Compile Include="Models\StockChip.cs" />
     <Compile Include="Models\StockFound.cs" />
@@ -188,7 +187,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Auth\Register.cshtml" />
     <Content Include="Views\Auth\Login.cshtml" />
-    <Content Include="Views\Favorites\Create.cshtml" />
     <Content Include="Views\Favorites\Delete.cshtml" />
     <Content Include="Views\Favorites\Details.cshtml" />
     <Content Include="Views\Favorites\Index.cshtml" />

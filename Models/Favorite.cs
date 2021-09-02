@@ -22,5 +22,7 @@ namespace StockMap.Models
         public virtual Stock Stock { get; set; }
 
         public virtual User User { get; set; }
+
+        public IEnumerable<StockMap.Models.Favorite> FavoriteIndex { get; set; }
     }
 }
