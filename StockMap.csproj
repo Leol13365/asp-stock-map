@@ -131,11 +131,16 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\FavoritesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StockChipsController.cs" />
+    <Compile Include="Controllers\StockFoundsController.cs" />
+    <Compile Include="Controllers\StockTechesController.cs" />
+    <Compile Include="Controllers\StockYesterdaysController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\SessionAuth.cs" />
     <Compile Include="Models\Favorite.cs" />
+    <Compile Include="Models\FavoriteViewModel.cs" />
     <Compile Include="Models\Stock.cs" />
     <Compile Include="Models\StockChip.cs" />
     <Compile Include="Models\StockFound.cs" />
@@ -187,6 +192,11 @@
     <Content Include="Views\Favorites\Delete.cshtml" />
     <Content Include="Views\Favorites\Details.cshtml" />
     <Content Include="Views\Favorites\Index.cshtml" />
+    <Content Include="Views\StockChips\Index.cshtml" />
+    <Content Include="Views\StockFounds\Index.cshtml" />
+    <Content Include="Views\StockTeches\Index.cshtml" />
+    <Content Include="Views\StockYesterdays\Index.cshtml" />
+    <Content Include="Views\StockFounds\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

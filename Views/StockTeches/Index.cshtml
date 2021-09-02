@@ -1,0 +1,163 @@
+﻿@model IEnumerable<StockMap.Models.StockTech>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>技術面股票</h2>
+
+<div class="dropdown" style="margin:1%">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        三大面向股票
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="../StockTeches/Index">技術面</a></li>
+        <li><a href="../StockChips/Index">籌碼面</a></li>
+        <li><a href="../StockFounds/Index">基礎面</a></li>
+    </ul>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Stock.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day5)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day6)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day7)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day8)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day9)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day10)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day11)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day12)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day13)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day14)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day15)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day16)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day17)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day18)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day19)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day20)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day4)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day5)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day6)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day7)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day8)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day9)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day10)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day11)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day12)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day13)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day14)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day15)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day16)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day17)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day18)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day19)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day20)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.StockId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.StockId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.StockId })
+            </td>
+        </tr>
+    }
+
+</table>

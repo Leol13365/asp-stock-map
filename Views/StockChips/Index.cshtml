@@ -1,0 +1,73 @@
+﻿@model IEnumerable<StockMap.Models.StockChip>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>籌碼面股票</h2>
+
+<div class="dropdown" style="margin:1%">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        三大面向股票
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="../StockTeches/Index">技術面</a></li>
+        <li><a href="../StockChips/Index">籌碼面</a></li>
+        <li><a href="../StockFounds/Index">基礎面</a></li>
+    </ul>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Stock.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StockFINBS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StockTCNBS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StockDNBSSelf)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StockDNBSRisk)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThreeSellBuy)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockFINBS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockTCNBS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockDNBSSelf)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockDNBSRisk)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThreeSellBuy)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.StockId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.StockId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.StockId })
+            </td>
+        </tr>
+    }
+
+</table>

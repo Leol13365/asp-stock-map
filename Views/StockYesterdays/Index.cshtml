@@ -1,0 +1,75 @@
+﻿@model IEnumerable<StockMap.Models.StockYesterday>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Stock.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StockDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Volumn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpenPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HighestPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LowestPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClosingPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SellBuy)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stock.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StockDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Volumn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OpenPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HighestPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LowestPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClosingPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SellBuy)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.StockId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.StockId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.StockId })
+        </td>
+    </tr>
+}
+
+</table>
