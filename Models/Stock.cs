@@ -32,6 +32,7 @@ namespace StockMap.Models
 
         public DateTime CreateTime { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:F}")]
         public DateTime UpdateTime { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
