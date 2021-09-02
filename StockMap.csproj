@@ -133,6 +133,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StockChipsController.cs" />
     <Compile Include="Controllers\StockFoundsController.cs" />
+    <Compile Include="Controllers\StocksController.cs" />
     <Compile Include="Controllers\StockTechesController.cs" />
     <Compile Include="Controllers\StockYesterdaysController.cs" />
     <Compile Include="Global.asax.cs">
@@ -195,6 +196,7 @@
     <Content Include="Views\StockTeches\Index.cshtml" />
     <Content Include="Views\StockYesterdays\Index.cshtml" />
     <Content Include="Views\StockFounds\Test.cshtml" />
+    <Content Include="Views\Stocks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
