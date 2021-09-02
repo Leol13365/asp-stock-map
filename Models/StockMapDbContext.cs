@@ -27,12 +27,8 @@ namespace StockMap.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Stock>()
-                .Property(e => e.Id)
+                .Property(e => e.StockId)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<Stock>()
-                .Property(e => e.Price)
-                .HasPrecision(16, 2);
 
             modelBuilder.Entity<Stock>()
                 .HasMany(e => e.Favorites)
@@ -63,121 +59,13 @@ namespace StockMap.Models
                 .Property(e => e.StockId)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<StockFound>()
-                .Property(e => e.ClosingPrice)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockFound>()
-                .Property(e => e.PERatio)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockFound>()
-                .Property(e => e.Dividend)
-                .HasPrecision(16, 2);
-
             modelBuilder.Entity<StockTech>()
                 .Property(e => e.StockId)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day1)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day2)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day3)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day4)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day5)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day6)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day7)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day8)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day9)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day10)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day11)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day12)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day13)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day14)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day15)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day16)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day17)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day18)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day19)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockTech>()
-                .Property(e => e.Day20)
-                .HasPrecision(16, 2);
-
             modelBuilder.Entity<StockYesterday>()
                 .Property(e => e.StockId)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<StockYesterday>()
-                .Property(e => e.OpenPrice)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockYesterday>()
-                .Property(e => e.HighestPrice)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockYesterday>()
-                .Property(e => e.LowestPrice)
-                .HasPrecision(16, 2);
-
-            modelBuilder.Entity<StockYesterday>()
-                .Property(e => e.ClosingPrice)
-                .HasPrecision(16, 2);
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.Favorites)

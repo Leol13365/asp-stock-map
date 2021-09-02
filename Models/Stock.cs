@@ -16,23 +16,36 @@ namespace StockMap.Models
         }
 
         [StringLength(20)]
-        public string Id { get; set; }
+        public string StockId { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Name { get; set; }
+        public string StockName { get; set; }
+
+        public decimal PriceNow { get; set; }
+
+        public decimal VolumeNow { get; set; }
+
+        public decimal VolumeAll { get; set; }
+
+        public decimal OpenPrice { get; set; }
+
+        public decimal HighestPrice { get; set; }
+
+        public decimal LowestPrice { get; set; }
+
+        public decimal ClosingPrice { get; set; }
+
+        public decimal Increase { get; set; }
+
+        public decimal Amplitude { get; set; }
+
+        public decimal Updown { get; set; }
 
         public int FavoriteCount { get; set; }
 
-        public int SSell { get; set; }
-
-        public int SBuy { get; set; }
-
-        public decimal Price { get; set; }
-
         public DateTime CreateTime { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:F}")]
         public DateTime UpdateTime { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

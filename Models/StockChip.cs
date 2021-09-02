@@ -17,9 +17,9 @@ namespace StockMap.Models
 
         public int StockTCNBS { get; set; }
 
-        public int StockDNBSSelf { get; set; }
+        public int StockDNBSProprietary { get; set; }
 
-        public int StockDNBSRisk { get; set; }
+        public int StockDNBSHedge { get; set; }
 
         public int ThreeSellBuy { get; set; }
 
