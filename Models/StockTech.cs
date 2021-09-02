@@ -11,6 +11,7 @@ namespace StockMap.Models
     {
         [Key]
         [StringLength(20)]
+        [Display(Name = "ªÑ²¼¥N½X")]
         public string StockId { get; set; }
 
         public decimal Day1 { get; set; }

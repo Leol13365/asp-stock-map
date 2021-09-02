@@ -16,6 +16,7 @@ namespace StockMap.Models
 
         [Required]
         [StringLength(20)]
+        [Display(Name = "股票代碼")]
         [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "請輸入正確的股票代碼格式")]
         public string StockId { get; set; }
 

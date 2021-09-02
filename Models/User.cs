@@ -18,11 +18,13 @@ namespace StockMap.Models
         [Key]
         [Required]
         [StringLength(20)]
+        [Display(Name = "帳號")]
         [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "僅能有英文以及數字")]
         public string Account { get; set; }
 
         [Required]
         [StringLength(20)]
+        [Display(Name = "密碼")]
         [DataType(DataType.Password)]
         [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "僅能有英文以及數字")]
         public string Password { get; set; }
