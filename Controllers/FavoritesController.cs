@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using StockMap.Models;
 
 namespace StockMap.Controllers
@@ -48,6 +49,13 @@ namespace StockMap.Controllers
                 if (favorite != null)
                 {
                     ModelState.AddModelError(nameof(data.StockId), "此股票已在收藏內");
+                    return View(data);
+                }
+
+                int max = db.Favorites.Count(m => m.UserAccount == userAccount);
+                if (max >= 10)
+                {
+                    ModelState.AddModelError(nameof(data.StockId), "已達收藏上限");
                     return View(data);
                 }
 
