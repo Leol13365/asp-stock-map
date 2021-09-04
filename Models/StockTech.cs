@@ -55,5 +55,12 @@ namespace StockMap.Models
         public decimal Day20 { get; set; }
 
         public virtual Stock Stock { get; set; }
+
+    }
+
+    public class ModelChartJs
+    {
+        public string stockName { get; set; }
+        public int averagePrice { get; set; }
     }
 }

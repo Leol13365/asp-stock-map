@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<StockMap.Models.StockTech>
+@Scripts.Render("~/bundles/highcharts")
 
 @{
     ViewBag.Title = "Index";
+    //var jsonMonths = Json.Encode(ViewBag.DateLabel);//將Controller傳來轉型成json
+    //var jsonErrDev = Json.Encode(Model);//將透過Model讀取的資料轉成json
 }
 
 <h2>技術面股票</h2>
@@ -18,146 +21,241 @@
     </ul>
 </div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Stock.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day2)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day3)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day4)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day5)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day6)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day7)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day8)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day9)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day10)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day11)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day12)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day13)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day14)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day15)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day16)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day17)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day18)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day19)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day20)
-        </th>
-        <th></th>
-    </tr>
+@*<script type="text/javascript">
+        $(function () {
+            var option = option = getOption("container", '@ViewBag.titletext');
+            //生成两个serial
+            option.xAxis.categories = @Html.Raw(@ViewBag.categories)
+            option.series[0].data = @ViewBag.amount
+            option.series[1].data = @ViewBag.quantity
+            option.subtitle.text = '@ViewBag.subtitle'
 
-    @foreach (var item in Model)
+            chart = new Highcharts.Chart(option);
+
+            $("text:contains('销售数量')").trigger('click');
+        });
+
+        function getOption(container, title) {
+            var options = {
+                chart: {renderTo: container,type: 'line' },
+                title: {text: title},
+                subtitle: {text: 'imc'},
+                xAxis: {title: {text: '日期'}},
+                yAxis: {title: {text: '数量或金额'},min: 0, /*定义最小值*/},
+                plotOptions: {line: {dataLabels: {enabled: true}}},tooltip: {shared: false , /*共享数据提示框*/ },
+                credits: {enabled: false},
+                series: [{ name: "销售金额"}, {name: "销售数量"}]
+            }
+            return options;
+        }
+    </script>*@
+
+@{
+    ViewBag.Title = "ErrDevBar";
+    var jsonMonths = Json.Encode(ViewBag.MonthLabel);//將Controller傳來轉型成json
+    var jsonErrDev = Json.Encode(Model);//將透過Model讀取的資料轉成json
+}
+
+<h2>ErrDevBar</h2>
+<canvas id="BarChart"></canvas> @*Chart一定用使用canvas標籤，不然會出現建立失敗的錯誤訊息*@
+<script>
+    var jsErrDev =@Html.Raw(jsonErrDev);//顯示json原始資料
+    var ctx = document.getElementById("BarChart");
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels:@Html.Raw(jsonMonths),
+            datasets: [{
+                label: jsErrDev[0].dev,
+                data: jsErrDev[0].errCount
+            }]
+        }
+    })
+</script>
+
+@{
+    String title = "";
+    string[] price = new String[20];
+    foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stock.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day3)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day4)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day5)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day6)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day7)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day8)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day9)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day10)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day11)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day12)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day13)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day14)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day15)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day16)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day17)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day18)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day19)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day20)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.StockId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.StockId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.StockId })
-            </td>
-        </tr>
-    }
+        title = (@Html.DisplayNameFor(model => model.Stock.StockName)).ToString();
+        price[0] = (@Html.DisplayFor(modelItem => item.Day1)).ToString();
+        price[1] = (@Html.DisplayFor(modelItem => item.Day2)).ToString();
+        price[2] = (@Html.DisplayFor(modelItem => item.Day3)).ToString();
+        price[3] = (@Html.DisplayFor(modelItem => item.Day4)).ToString();
+        price[4] = (@Html.DisplayFor(modelItem => item.Day5)).ToString();
+        price[5] = (@Html.DisplayFor(modelItem => item.Day6)).ToString();
+        price[6] = (@Html.DisplayFor(modelItem => item.Day7)).ToString();
+        price[7] = (@Html.DisplayFor(modelItem => item.Day8)).ToString();
+        price[8] = (@Html.DisplayFor(modelItem => item.Day9)).ToString();
+        price[9] = (@Html.DisplayFor(modelItem => item.Day10)).ToString();
+        price[10] = (@Html.DisplayFor(modelItem => item.Day11)).ToString();
+        price[11] = (@Html.DisplayFor(modelItem => item.Day12)).ToString();
+        price[12] = (@Html.DisplayFor(modelItem => item.Day13)).ToString();
+        price[13] = (@Html.DisplayFor(modelItem => item.Day14)).ToString();
+        price[14] = (@Html.DisplayFor(modelItem => item.Day15)).ToString();
+        price[15] = (@Html.DisplayFor(modelItem => item.Day16)).ToString();
+        price[16] = (@Html.DisplayFor(modelItem => item.Day17)).ToString();
+        price[17] = (@Html.DisplayFor(modelItem => item.Day18)).ToString();
+        price[18] = (@Html.DisplayFor(modelItem => item.Day19)).ToString();
+        price[19] = (@Html.DisplayFor(modelItem => item.Day20)).ToString();
+        String[] data = new String[20];
+        for (int i = 0; i < 19; i++)
+        {
+            data[i] = price[i] ;
+        };
 
-</table>
+
+        var myChart = new Chart(width: 600, height: 400)
+            .AddTitle(title)
+            .AddSeries(
+                name: "Employee",
+                xValue: title,
+                yValues: price)
+            .Write();
+    }
+}
+
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock.StockName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day4)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day5)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day6)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day7)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day8)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day9)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day10)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day11)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day12)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day13)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day14)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day15)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day16)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day17)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day18)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day19)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day20)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock.StockName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day4)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day5)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day6)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day7)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day8)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day9)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day10)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day11)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day12)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day13)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day14)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day15)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day16)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day17)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day18)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day19)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day20)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.StockId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.StockId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.StockId })
+                </td>
+            </tr>
+        }
+
+    </table>*@
