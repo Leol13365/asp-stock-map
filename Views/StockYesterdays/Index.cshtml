@@ -1,75 +1,80 @@
-﻿@model IEnumerable<StockMap.Models.StockYesterday>
+﻿@model PagedList.IPagedList<StockMap.Models.StockYesterday>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>昨日熱門股</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Stock.Name)
+            股票代碼
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StockDate)
+            股票名稱
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Volumn)
+            資料日期
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OpenPrice)
+            交易量
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HighestPrice)
+            開盤價
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LowestPrice)
+            最高價
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ClosingPrice)
+            最低價
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SellBuy)
+            收盤價
         </th>
-        <th></th>
+        <th>
+            買賣差
+        </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Stock.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StockDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Volumn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OpenPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HighestPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LowestPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClosingPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SellBuy)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.StockId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.StockId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.StockId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @using (Html.BeginForm("Index", "Stocks", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input name="searchId" type="hidden" value=@item.Stock.StockId>
+                    <input type="submit" value=@item.Stock.StockId>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock.StockName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Volumn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HighestPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LowestPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClosingPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SellBuy)
+            </td>
+        </tr>
+    }
 
 </table>

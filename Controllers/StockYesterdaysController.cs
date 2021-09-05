@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using StockMap.Models;
 
 namespace StockMap.Controllers
@@ -18,7 +19,8 @@ namespace StockMap.Controllers
         public ActionResult Index()
         {
             var stockYesterdays = db.StockYesterdays.Include(s => s.Stock);
-            return View(stockYesterdays.ToList());
+            stockYesterdays = stockYesterdays.OrderByDescending(s => s.Volumn);
+            return View(stockYesterdays.ToPagedList(1, 10));
         }
 
         protected override void Dispose(bool disposing)
