@@ -1,4 +1,15 @@
 ﻿@model StockMap.Models.Favorite
+
+<script type="text/javascript">
+    $(function () {
+        $("a.postLink").click(function (e) {
+            e.preventDefault();
+            $.post($(this).attr("href"), function (data) {
+            });
+        });
+    });
+</script>
+
 @{
     ViewBag.Title = "收藏股票";
 }
@@ -8,22 +19,22 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-<h4>新增收藏股票</h4>
-<div class="form-horizontal">
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        <label class="control-label col-md-2">請輸入股票代碼：</label>
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.StockId, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.StockId, "", new { @class = "text-danger" })
+    <h4>新增收藏股票</h4>
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group row">
+            <label class="control-label col-md-2">請輸入股票代碼：</label>
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.StockId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.StockId, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-1">
+                    <input type="submit" value="新增" class="btn btn-default" />
+                </div>
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="新增" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
 
 <table class="table">
@@ -51,7 +62,12 @@
     {
         <tr>
             <td>
-                @Html.ActionLink(item.Stock.StockId, "Details", new { id = item.StockId })
+                @using (Html.BeginForm("Index", "Stocks", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input name="searchId" type="hidden" value=@item.Stock.StockId>
+                    <input type="submit" value=@item.Stock.StockId>
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Stock.StockName)
@@ -71,3 +87,4 @@
         </tr>
     }
 </table>
+
