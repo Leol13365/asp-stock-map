@@ -8,7 +8,7 @@
 {
     @Html.AntiForgeryToken()
     <form asp-action="Index" method="post">
-        <div class="form-actions no-color">
+        <div class="form-actions no-color row">
             <p>
                 搜尋股票 : <input type="text" name="SearchId" value="@ViewData["CurrentFilter"]" />
                 <input type="submit" value="Search" class="btn btn-default" />
