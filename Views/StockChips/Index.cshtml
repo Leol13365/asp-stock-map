@@ -1,4 +1,6 @@
-﻿@model IEnumerable<StockMap.Models.StockChip>
+﻿@model PagedList.IPagedList<StockMap.Models.StockChip>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Index";
@@ -21,31 +23,36 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Stock.Name)
+            股票代碼
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StockFINBS)
+            股票名稱
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StockTCNBS)
+            @Html.ActionLink("外資買賣超", "Index", new { sortOrder = ViewBag.FINBSSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StockDNBSSelf)
+            @Html.ActionLink("投信買賣超", "Index", new { sortOrder = ViewBag.ITCNBSSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StockDNBSRisk)
+            @Html.ActionLink("自營商買賣超(自行買賣)", "Index", new { sortOrder = ViewBag.DNBSSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ThreeSellBuy)
+            自營商買賣(避險)
         </th>
-        <th></th>
+        <th>
+            @Html.ActionLink("三大法人買賣超", "Index", new { sortOrder = ViewBag.TSBSortParm })
+        </th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Stock.Name)
+                @Html.DisplayFor(modelItem => item.StockId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock.StockName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StockFINBS)
@@ -54,18 +61,13 @@
                 @Html.DisplayFor(modelItem => item.StockTCNBS)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StockDNBSSelf)
+                @Html.DisplayFor(modelItem => item.StockDNBSProprietary)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StockDNBSRisk)
+                @Html.DisplayFor(modelItem => item.StockDNBSHedge)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ThreeSellBuy)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.StockId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.StockId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.StockId })
             </td>
         </tr>
     }
