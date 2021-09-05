@@ -49,7 +49,12 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.StockId)
+                @using (Html.BeginForm("Index", "Stocks", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input name="searchId" type="hidden" value=@item.Stock.StockId>
+                    <input type="submit" value=@item.Stock.StockId>
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Stock.StockName)
