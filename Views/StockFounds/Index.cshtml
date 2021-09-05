@@ -1,4 +1,6 @@
-﻿@model IEnumerable<StockMap.Models.StockFound>
+﻿@model PagedList.IPagedList<StockMap.Models.StockFound>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Index";
@@ -18,43 +20,61 @@
     </ul>
 </div>
 
+@using (Html.BeginForm("Index", "StockFounds", FormMethod.Get))
+{
+    <p>
+        本益比最小值: @Html.TextBox("SearchIntMin", ViewBag.CurrentFilterMin as string)~本益比最大值:@Html.TextBox("SearchIntMax", ViewBag.CurrentFilterMax as string)
+        <input type="submit" value="Search" />
+    </p>
+    if (ViewBag.erroMsg != null)
+    {
+        <div class="alert alert-danger" role="alert">@ViewBag.erroMsg</div>
+    }
+}
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Stock.Name)
+            股票代碼
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ClosingPrice)
+            股票名稱
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PERatio)
+            收盤價
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Dividend)
+            @Html.ActionLink("本益比", "Index", new { sortOrder = ViewBag.PERSortParm, currentFilterMin = ViewBag.CurrentFilterMin, currentFilterMax = ViewBag.CurrentFilterMax })
         </th>
-        <th></th>
+        <th>
+            股息
+        </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Stock.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClosingPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PERatio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Dividend)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.StockId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.StockId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.StockId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock.StockName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClosingPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PERatio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dividend)
+            </td>
+        </tr>
+    }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.PERSortParm, currentFilterMin = ViewBag.currentFilterMin, currentFilterMax = ViewBag.CurrentFilterMax }))

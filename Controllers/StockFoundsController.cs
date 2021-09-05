@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using StockMap.Models;
+using PagedList;
 
 namespace StockMap.Controllers
 {
@@ -30,10 +31,48 @@ namespace StockMap.Controllers
         }
 
         // GET: StockFounds
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilterMin, string currentFilterMax , String SearchIntMin , String SearchIntMax ,int? page)
         {
-            var stockFounds = db.StockFounds.Include(s => s.Stock);
-            return View(stockFounds.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.PERSortParm = sortOrder == "per_esc" ? "per_desc" : "per_esc";
+            if(SearchIntMin != null && SearchIntMax != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                SearchIntMin = currentFilterMin;
+                SearchIntMax = currentFilterMax;
+            }
+            int Max = 0;
+            int Min = 0;
+            bool isNumberOrNotNull = int.TryParse(SearchIntMin, out Min) == true && int.TryParse(SearchIntMax, out Max) == true;
+            bool isNumber = (int.TryParse(SearchIntMin, out Min) == false && SearchIntMin != null) || (int.TryParse(SearchIntMax, out Max) == false && SearchIntMax != null);
+            var Erro = "請輸入數字";
+            if (isNumber) { ViewBag.erroMsg = Erro; }
+            ViewBag.CurrentFilterMin = SearchIntMin;
+            ViewBag.CurrentFilterMax = SearchIntMax;
+            var stockFound = from s in db.StockFounds
+                             select s;
+            if (isNumberOrNotNull)
+            {
+                stockFound = db.StockFounds.Where(m => m.PERatio >= Min & m.PERatio <= Max);
+            }
+            switch (sortOrder)
+            {
+                case "per_desc":
+                    stockFound = stockFound.OrderByDescending(s => s.PERatio);
+                    break;
+                case "per_esc":
+                    stockFound = stockFound.OrderBy(s => s.PERatio);
+                    break;
+                default:
+                    stockFound = stockFound.OrderBy(s => s.StockId);
+                    break;
+            }
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(stockFound.ToPagedList(pageNumber, pageSize));
         }
 
         protected override void Dispose(bool disposing)
