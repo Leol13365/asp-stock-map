@@ -66,21 +66,6 @@ namespace StockMap.Controllers
             return View(data);
         }
 
-        // GET: Favorites/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Favorite favorite = db.Favorites.Find(id);
-            if (favorite == null)
-            {
-                return HttpNotFound();
-            }
-            return View(favorite);
-        }
-
         // GET: Favorites/Delete/5
         public ActionResult Delete(int? id)
         {
