@@ -75,5 +75,22 @@ namespace StockMap.Models
         public decimal? Day30 { get; set; }
 
         public virtual Stock Stock { get; set; }
+
+        [NotMapped]
+        public ChartData ChartData { get; set; }
+    }
+
+    public class Dataset
+    {
+        public string label { get; set; }
+
+        public double[] data { get; set; }
+    }
+
+    public class ChartData
+    {
+        public string[] labels { get; set; }
+
+        public Dataset[] datasets { get; set; }
     }
 }
