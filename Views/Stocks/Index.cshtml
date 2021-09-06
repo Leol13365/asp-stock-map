@@ -23,119 +23,123 @@
     <h5>@ViewBag.ErroMsg</h5>
     @if (ViewBag.CheckOk == true)
     {
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.StockId)
-            </dt>
+        <div class="row">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.StockId)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.StockId)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.StockId)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.StockName)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.StockName)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.StockName)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.StockName)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.PriceNow)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.PriceNow)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.PriceNow)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.PriceNow)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.VolumeNow)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.VolumeNow)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.VolumeNow)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.VolumeNow)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.VolumeAll)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.VolumeAll)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.VolumeAll)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.VolumeAll)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.OpenPrice)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.OpenPrice)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.OpenPrice)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.OpenPrice)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.HighestPrice)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.HighestPrice)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.HighestPrice)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.HighestPrice)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.LowestPrice)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.LowestPrice)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.LowestPrice)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.LowestPrice)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.ClosingPrice)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ClosingPrice)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.ClosingPrice)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.ClosingPrice)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Increase)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Increase)
+                </dt>
 
-            <dd>
-                <p>@Html.DisplayFor(model => model.Increase)%</p>
-            </dd>
+                <dd>
+                    <p>@Html.DisplayFor(model => model.Increase)%</p>
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Amplitude)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Amplitude)
+                </dt>
 
-            <dd>
-                <p>@Html.DisplayFor(model => model.Amplitude)%</p>
-            </dd>
+                <dd>
+                    <p>@Html.DisplayFor(model => model.Amplitude)%</p>
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Updown)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Updown)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Updown)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Updown)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.FavoriteCount)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.FavoriteCount)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.FavoriteCount)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.FavoriteCount)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.UpdateTime)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.UpdateTime)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.UpdateTime)
-            </dd>
-
-        </dl>
+                <dd>
+                    @Html.DisplayFor(model => model.UpdateTime)
+                </dd>
+            </dl>
+            <div>
+                @ViewBag.Result
+            </div>
+        </div>
     }
 </div>

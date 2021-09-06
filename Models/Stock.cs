@@ -72,5 +72,15 @@ namespace StockMap.Models
         public virtual StockTech StockTech { get; set; }
 
         public virtual StockYesterday StockYesterday { get; set; }
+
+        public IEnumerable<News> News { get; set; }
     }
+
+    public class News
+    {
+        public string StockId { get; set; }
+        public string NewLink { get; set; }
+    }
+
+
 }
