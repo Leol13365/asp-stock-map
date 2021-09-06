@@ -33,22 +33,37 @@ namespace StockMap.Controllers
             var stockTeches = db.StockTeches.Find(searchId);
 
             var properties = stockTeches.GetType().GetProperties();
-            var values = new double[30];
+            List<double> values = new List<double>();
             for (int i = 0; i < 30; i++)
             {
-                var a = values[i] = Convert.ToDouble(properties[i + 2].GetValue(stockTeches));
+                values.Add(Convert.ToDouble(properties[i + 2].GetValue(stockTeches)));
             }
 
-            string[] dates = new string[10];
-            for (int i = 1; i < 11; i++)
+            List<string> dates = new List<string>();
+            int countWeekend = 0;
+            double[] fiveMA = new double[10];
+            double[] tenMA = new double[10];
+            double[] twentyMA = new double[10];
+
+            for (int i = 0; i < 10; i++)
             {
-                dates[i - 1] = DateTime.Now.AddDays(-i).ToString("MM/dd");
+                var date = DateTime.Today.AddDays(-(i + 1 + countWeekend));
+                if(date.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    date = date.AddDays(-2);
+                    countWeekend += 2;
+                }
+                dates.Add(date.ToString());
+
+                fiveMA[i] = values.GetRange(i , 5).Average();
+                tenMA[i] = values.GetRange(i , 10).Average();
+                twentyMA[i] = values.GetRange(i , 20).Average();
             }
             ViewBag.DateLabel = dates;
 
             ChartData chartData = new ChartData
             {
-                labels = dates,
+                labels = dates.ToArray(),
                 datasets = new Dataset[]{
                     new Dataset
                     {
