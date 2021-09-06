@@ -48,7 +48,7 @@ namespace StockMap.Controllers
             int Min = 0;
             bool isNumberOrNotNull = int.TryParse(SearchIntMin, out Min) == true && int.TryParse(SearchIntMax, out Max) == true;
             bool isNumber = (int.TryParse(SearchIntMin, out Min) == false && SearchIntMin != null) || (int.TryParse(SearchIntMax, out Max) == false && SearchIntMax != null);
-            var Erro = "請輸入數字";
+            var Erro = "請輸入整數";
             if (isNumber) { ViewBag.erroMsg = Erro; }
             ViewBag.CurrentFilterMin = SearchIntMin;
             ViewBag.CurrentFilterMax = SearchIntMax;
