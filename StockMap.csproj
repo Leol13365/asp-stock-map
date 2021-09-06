@@ -200,7 +200,6 @@
     <Content Include="Views\Auth\Register.cshtml" />
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Favorites\Delete.cshtml" />
-    <Content Include="Views\Favorites\Details.cshtml" />
     <Content Include="Views\Favorites\Index.cshtml" />
     <Content Include="Views\StockChips\Index.cshtml" />
     <Content Include="Views\StockFounds\Index.cshtml" />
