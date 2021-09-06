@@ -34,12 +34,25 @@ namespace StockMap.Controllers
 
             var properties = stockTeches.GetType().GetProperties();
             List<double> values = new List<double>();
+            int countNull = 0;
             for (int i = 0; i < 30; i++)
             {
-                values.Add(Convert.ToDouble(properties[i + 2].GetValue(stockTeches)));
+                if (countNull >= 3)
+                {
+                    ViewBag.ErroMsg = "此股票資料遺失過多";
+                    return View();
+                }
+
+                var value = Convert.ToDouble(properties[i + 2].GetValue(stockTeches));
+                if (value == 0)
+                {
+                    countNull += 1;
+                    continue;
+                }
+                values.Add(value);
             }
 
-            List<string> dates = new List<string>();
+            string[] dates = new string[10];
             int countWeekend = 0;
             double[] fiveMA = new double[10];
             double[] tenMA = new double[10];
@@ -48,32 +61,41 @@ namespace StockMap.Controllers
             for (int i = 0; i < 10; i++)
             {
                 var date = DateTime.Today.AddDays(-(i + 1 + countWeekend));
-                if(date.DayOfWeek == DayOfWeek.Sunday)
+                if (date.DayOfWeek == DayOfWeek.Sunday)
                 {
                     date = date.AddDays(-2);
                     countWeekend += 2;
                 }
-                dates.Add(date.ToString());
+                dates[i] = date.ToString("MM/dd");
 
-                fiveMA[i] = values.GetRange(i , 5).Average();
-                tenMA[i] = values.GetRange(i , 10).Average();
-                twentyMA[i] = values.GetRange(i , 20).Average();
+                fiveMA[i] = values.GetRange(i, 5).Average();
+                tenMA[i] = values.GetRange(i, 10).Average();
+                twentyMA[i] = values.GetRange(i, 20).Average();
             }
-            ViewBag.DateLabel = dates;
+
+            Array.Reverse(dates);
+            Array.Reverse(fiveMA);
+            Array.Reverse(tenMA);
+            Array.Reverse(twentyMA);
 
             ChartData chartData = new ChartData
             {
-                labels = dates.ToArray(),
+                labels = dates,
                 datasets = new Dataset[]{
                     new Dataset
                     {
-                        label = "ABC",
-                        data = new double[] { 1.0, 2, 3, 4, 5 }
+                        label = "5MA",
+                        data = fiveMA
                     },
                     new Dataset
                     {
-                        label = "BBC",
-                        data = new double[] { 9, 4, 7, 5, 7 }
+                        label = "10MA",
+                        data = tenMA
+                    },
+                    new Dataset
+                    {
+                        label = "20MA",
+                        data = twentyMA
                     }
                 }
             };
