@@ -39,6 +39,7 @@
     @if (ViewBag.CheckOk == true)
     {
         var jsonChartData = @Json.Encode(Model.ChartData);//將透過Model讀取的資料轉成json
+        <h2 class="text-left">@ViewBag.Cross</h2>
         <h1 class="text-center">@Html.DisplayFor(modelItem => modelItem.Stock.StockName)</h1>
         <canvas id="LineChart"></canvas>//Chart一定用使用canvas標籤，不然會出現建立失敗的錯誤訊息
         <script>

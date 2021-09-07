@@ -52,6 +52,27 @@ namespace StockMap.Controllers
                 values.Add(value);
             }
 
+            if (countNull > 0)
+            {
+                int firstNull = values.FindIndex(x => x.Equals(0));
+                if (countNull > 1)
+                {
+                    int lastNull = values.FindLastIndex(x => x.Equals(0));
+                    if (firstNull + 1 == lastNull && (firstNull - 1 < 0 || lastNull + 1 > 29))
+                    {
+                        ViewBag.ErroMsg = "此股票資料遺失過多";
+                        return View();
+                    }
+                    else if (firstNull + 1 == lastNull)
+                    {
+                        values[lastNull] = (values[firstNull - 1] + values[lastNull + 1]) / 2;
+                        values[firstNull] = (values[firstNull - 1] + values[lastNull + 1]) / 2;
+                    }
+                }
+                else { values[firstNull] = (firstNull > 0) ? 0 : (values[firstNull - 1] + values[firstNull + 1]) / 2; }
+                
+            }
+
             string[] dates = new string[10];
             int countWeekend = 0;
             double[] fiveMA = new double[10];
@@ -77,6 +98,21 @@ namespace StockMap.Controllers
             Array.Reverse(fiveMA);
             Array.Reverse(tenMA);
             Array.Reverse(twentyMA);
+            ViewBag.Cross = "";
+            if (fiveMA[0] < twentyMA[0])
+            {
+                for (int i = 1; i < 10; i++)
+                {
+                    if (fiveMA[i] > twentyMA[i]) { ViewBag.Cross = dates[i - 1] + "~" + dates[i] + "出現黃金交叉"; break; }
+                }
+            }
+            else if (fiveMA[0] > twentyMA[0])
+            {
+                for (int i = 1; i < 10; i++)
+                {
+                    if (fiveMA[i] < twentyMA[i]) { ViewBag.Cross = "出現死亡交叉"; break; }
+                }
+            }
 
             ChartData chartData = new ChartData
             {
