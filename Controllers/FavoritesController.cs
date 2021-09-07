@@ -5,6 +5,8 @@ using System.Data.Entity;
 using System.Dynamic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -18,9 +20,36 @@ namespace StockMap.Controllers
         private StockMapDbContext db = new StockMapDbContext();
 
         // GET: Favorites
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var userAccount = Session["account"].ToString();
+
+            string[] favoriteStock = db.Favorites.Where(m => m.UserAccount == userAccount).Select(m => m.StockId).ToList().ToArray();
+            DateTime[] stockUpdate = db.Favorites.Include(f => f.Stock).Where(m => m.UserAccount == userAccount).Select(m => m.Stock.UpdateTime).ToList().ToArray();
+            List<string> searchStockId = new List<string>();
+            string searchId = "";
+            DateTime localDate = DateTime.UtcNow;
+
+            for (int i = 0; i < favoriteStock.Length; i++)
+            {
+                TimeSpan between = localDate.Subtract(stockUpdate[i]);
+                if (between.TotalMinutes > 1) { searchStockId.Add(favoriteStock[i]); }
+            }
+            for (int i = 0; i < searchStockId.Count; i++)
+            {
+                searchId += (i == searchStockId.Count - 1) ? searchStockId.ElementAt(i) : searchStockId.ElementAt(i) + "&stock_id=";
+            }
+            try
+            {
+                string targetURL = "http://localhost:5000/api/v1/stock?stock_id=" + searchId;
+                HttpClient client = new HttpClient();
+                client.MaxResponseContentBufferSize = Int32.MaxValue;
+                var response = await client.GetStringAsync(targetURL);
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
             var favorites = db.Favorites
                 .Include(f => f.Stock)
                 .Include(f => f.User)
