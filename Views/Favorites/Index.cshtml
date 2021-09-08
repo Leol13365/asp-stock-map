@@ -46,10 +46,13 @@
             股票名稱
         </th>
         <th>
-            收藏次數
+            被收藏次數
         </th>
         <th>
             價格/股
+        </th>
+        <th>
+            資料更新時間
         </th>
         <th>
         </th>
@@ -74,6 +77,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Stock.PriceNow)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock.UpdateTime.AddHours(8))
             </td>
             <td>
                 @Html.ActionLink("移除", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })

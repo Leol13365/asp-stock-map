@@ -50,7 +50,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.VolumeNow)
+                    <span title="過去一段時間的交易張數">@Html.DisplayNameFor(model => model.VolumeNow)</span>
                 </dt>
 
                 <dd>
@@ -58,7 +58,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.VolumeAll)
+                    <span title="今天截至目前的交易張數">@Html.DisplayNameFor(model => model.VolumeAll)</span>
                 </dt>
 
                 <dd>
@@ -98,7 +98,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.Increase)
+                    <span title="相較於昨日收盤價的現價變動幅度">@Html.DisplayNameFor(model => model.Increase)</span>
                 </dt>
 
                 <dd>
@@ -106,7 +106,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.Amplitude)
+                    <span title="相較於昨日收盤價，今日截至目前為止最高價與最低價之間的變動幅度;常用於觀察個股的活躍程度">@Html.DisplayNameFor(model => model.Amplitude)</span>
                 </dt>
 
                 <dd>
@@ -114,7 +114,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.Updown)
+                    <span title="目前價格與昨日收盤價的價差"> @Html.DisplayNameFor(model => model.Updown)</span>
                 </dt>
 
                 <dd>
@@ -134,8 +134,9 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.UpdateTime)
+                    @Html.DisplayFor(model => model.UpdateTime.AddHours(8))
                 </dd>
+
             </dl>
             <div>
                 @ViewBag.Result
@@ -143,3 +144,10 @@
         </div>
     }
 </div>
+
+<style>
+    dl {
+        font-size: 30px;
+        
+    }
+</style>

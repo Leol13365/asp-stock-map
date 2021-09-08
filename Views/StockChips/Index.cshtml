@@ -23,25 +23,38 @@
 <table class="table">
     <tr>
         <th>
-            股票代碼
+            <span>股票代碼</span>
         </th>
         <th>
             股票名稱
         </th>
         <th>
-            @Html.ActionLink("外資買賣超", "Index", new { sortOrder = ViewBag.FINBSSortParm, currentFilter = ViewBag.CurrentFilter })
+            <span title="此數值表示外資購買此檔股票多過於售賣的股數；
+外資資金是三大法人中最高的，對股價走勢的力量非常大，但買賣時機不好跟進">
+                @Html.ActionLink("外資買賣超", "Index", new { sortOrder = ViewBag.FINBSSortParm, currentFilter = ViewBag.CurrentFilter })
+            </span>
         </th>
         <th>
-            @Html.ActionLink("投信買賣超", "Index", new { sortOrder = ViewBag.ITCNBSSortParm, currentFilter = ViewBag.CurrentFilter })
+            <span title="此數值表示投信購買此檔股票多過於售賣的股數；
+投信操作時間相對較長，當投信開始買超或賣超，股價未來可能會有一段行情，對投資人參考性最高">
+                @Html.ActionLink("投信買賣超", "Index", new { sortOrder = ViewBag.ITCNBSSortParm, currentFilter = ViewBag.CurrentFilter })
+            </span>
         </th>
         <th>
-            @Html.ActionLink("自營商買賣超(自行買賣)", "Index", new { sortOrder = ViewBag.DNBSSortParm, currentFilter = ViewBag.CurrentFilter })
+            <span title="此數值表示自營商購買此檔股票多過於售賣的股數；
+自營商操作周期較短，資金也是三大法人最少的，對股價影響相對較小。可以搭配投信買賣超做參考，兩個同時買超or賣超的個股可以留意">
+                @Html.ActionLink("自營商買賣超(自行買賣)", "Index", new { sortOrder = ViewBag.DNBSSortParm, currentFilter = ViewBag.CurrentFilter })
+            </span>
         </th>
         <th>
-            自營商買賣(避險)
+            <span title="參考性較低，為券商為了其他金融商品所做的避險買賣">
+                自營商買賣(避險)
+            </span>
         </th>
         <th>
-            @Html.ActionLink("三大法人買賣超", "Index", new { sortOrder = ViewBag.TSBSortParm })
+            <span title="上述三大法人(外資、投信、自營商)對於此檔股票購買多過於售賣的總數">
+                @Html.ActionLink("三大法人買賣超", "Index", new { sortOrder = ViewBag.TSBSortParm })
+            </span>
         </th>
     </tr>
 

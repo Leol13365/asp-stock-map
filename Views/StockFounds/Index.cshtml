@@ -44,10 +44,14 @@
             收盤價
         </th>
         <th>
-            @Html.ActionLink("本益比", "Index", new { sortOrder = ViewBag.PERSortParm, currentFilterMin = ViewBag.CurrentFilterMin, currentFilterMax = ViewBag.CurrentFilterMax })
+            <span title="計算方式為現在股價/預估未來每股盈餘。可以快速判斷現在股價是便宜還是昂貴。每個產業的本益比並不相同，如果要做估價時必須要拿適合該產業的本益比來計算">
+                @Html.ActionLink("本益比", "Index", new { sortOrder = ViewBag.PERSortParm, currentFilterMin = ViewBag.CurrentFilterMin, currentFilterMax = ViewBag.CurrentFilterMax })
+            </span>
         </th>
         <th>
-            股息
+            <span title="上一期的現金股利/股。可視為把一筆錢長期投入股市，每年能拿回的利息報酬率。觀念類似銀行定存，簡單評估投入的資金所得到的報酬率">
+                股票殖利率
+            </span>
         </th>
     </tr>
 
