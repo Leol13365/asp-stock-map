@@ -5,9 +5,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using StockMap.Models;
 
 namespace StockMap.Controllers
@@ -34,22 +36,25 @@ namespace StockMap.Controllers
             DateTime localDate = DateTime.UtcNow;
             DateTime stockUpdate = db.Stocks.Find(searchId).UpdateTime;
             System.TimeSpan between = localDate.Subtract(stockUpdate);
-            if (between.TotalMinutes > 1 && localDate.Hour > 9 && localDate.Hour < 14)
+            Stock stock = new Stock();
+            if (between.TotalMinutes > 1 && localDate.Hour > 1 && localDate.Hour < 6)
             {
                 try
                 {
+                    //Thread.Sleep(60000);
                     string targetURL = "http://localhost:5000/api/v1/stock?stock_id=" + searchId;
                     HttpClient client = new HttpClient();
                     client.MaxResponseContentBufferSize = Int32.MaxValue;
                     var response = await client.GetStringAsync(targetURL);
+                    stock = JsonConvert.DeserializeObject<IEnumerable<Stock>>(response).First();
                 }
                 catch (HttpRequestException e)
                 {
                     Console.WriteLine(e.ToString());
+                    stock = db.Stocks.Find(searchId);
                 }
             }
 
-            Stock stock = db.Stocks.Find(searchId);
             ViewBag.CheckOk = true;
             return View(stock);
         }
