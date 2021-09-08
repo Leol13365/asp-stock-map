@@ -24,32 +24,37 @@ namespace StockMap.Controllers
         {
             var userAccount = Session["account"].ToString();
 
-            string[] favoriteStock = db.Favorites.Where(m => m.UserAccount == userAccount).Select(m => m.StockId).ToList().ToArray();
-            DateTime[] stockUpdate = db.Favorites.Include(f => f.Stock).Where(m => m.UserAccount == userAccount).Select(m => m.Stock.UpdateTime).ToList().ToArray();
-            List<string> searchStockId = new List<string>();
-            string searchId = "";
             DateTime localDate = DateTime.UtcNow;
+            if(localDate.Hour > 9 && localDate.Hour < 14)
+            {
+                string[] favoriteStock = db.Favorites.Where(m => m.UserAccount == userAccount).Select(m => m.StockId).ToList().ToArray();
+                DateTime[] stockUpdate = db.Favorites.Include(f => f.Stock).Where(m => m.UserAccount == userAccount).Select(m => m.Stock.UpdateTime).ToList().ToArray();
+                List<string> searchStockId = new List<string>();
+                string searchId = "";
 
-            for (int i = 0; i < favoriteStock.Length; i++)
-            {
-                TimeSpan between = localDate.Subtract(stockUpdate[i]);
-                if (between.TotalMinutes > 1) { searchStockId.Add(favoriteStock[i]); }
-            }
-            for (int i = 0; i < searchStockId.Count; i++)
-            {
-                searchId += (i == searchStockId.Count - 1) ? searchStockId.ElementAt(i) : searchStockId.ElementAt(i) + "&stock_id=";
-            }
-            try
-            {
-                string targetURL = "http://localhost:5000/api/v1/stock?stock_id=" + searchId;
-                HttpClient client = new HttpClient();
-                client.MaxResponseContentBufferSize = Int32.MaxValue;
-                var response = await client.GetStringAsync(targetURL);
-            }
-            catch (HttpRequestException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
+
+                for (int i = 0; i < favoriteStock.Length; i++)
+                {
+                    TimeSpan between = localDate.Subtract(stockUpdate[i]);
+                    if (between.TotalMinutes > 1) { searchStockId.Add(favoriteStock[i]); }
+                }
+                for (int i = 0; i < searchStockId.Count; i++)
+                {
+                    searchId += (i == searchStockId.Count - 1) ? searchStockId.ElementAt(i) : searchStockId.ElementAt(i) + "&stock_id=";
+                }
+                try
+                {
+                    string targetURL = "http://localhost:5000/api/v1/stock?stock_id=" + searchId;
+                    HttpClient client = new HttpClient();
+                    client.MaxResponseContentBufferSize = Int32.MaxValue;
+                    var response = await client.GetStringAsync(targetURL);
+                }
+                catch (HttpRequestException e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+            } 
+
             var favorites = db.Favorites
                 .Include(f => f.Stock)
                 .Include(f => f.User)
