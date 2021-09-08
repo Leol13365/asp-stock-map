@@ -1,4 +1,4 @@
-﻿@model StockMap.Models.Stock
+@model StockMap.Models.Stock
 
 @{
     ViewBag.Title = "Index";
@@ -102,7 +102,7 @@
                 </dt>
 
                 <dd>
-                    <p>@Html.DisplayFor(model => model.Increase)%</p>
+                    @Html.DisplayFor(model => model.Increase)%
                 </dd>
 
                 <dt>
@@ -110,7 +110,7 @@
                 </dt>
 
                 <dd>
-                    <p>@Html.DisplayFor(model => model.Amplitude)%</p>
+                    @Html.DisplayFor(model => model.Amplitude)%
                 </dd>
 
                 <dt>
@@ -134,7 +134,7 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.UpdateTime.AddHours(8))
+                    @Html.DisplayFor(model => model.UpdateTime)
                 </dd>
 
             </dl>

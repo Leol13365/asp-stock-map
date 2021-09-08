@@ -79,7 +79,7 @@
                 @Html.DisplayFor(modelItem => item.Stock.PriceNow)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Stock.UpdateTime.AddHours(8))
+                @Html.DisplayFor(modelItem => item.Stock.UpdateTime)
             </td>
             <td>
                 @Html.ActionLink("移除", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })

@@ -53,7 +53,7 @@ namespace StockMap.Controllers
                     Console.WriteLine(e.ToString());
                 }
             }
-
+            stock.UpdateTime = stock.UpdateTime.AddHours(8);
             ViewBag.CheckOk = true;
             return View(stock);
         }

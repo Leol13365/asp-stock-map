@@ -62,7 +62,10 @@ namespace StockMap.Controllers
                 .Include(f => f.Stock)
                 .Where(m => m.UserAccount == userAccount)
                 .ToList();
-            foreach(var favorite in favorites) { favorite.Stock = stocks.Find(m => m.StockId == favorite.StockId); }
+            foreach(var favorite in favorites) {
+                favorite.Stock = stocks.Find(m => m.StockId == favorite.StockId);
+                favorite.Stock.UpdateTime = favorite.Stock.UpdateTime.AddHours(8);
+            }
             var model = new Favorite() { FavoriteIndex = favorites };
             return View(model);
         }
