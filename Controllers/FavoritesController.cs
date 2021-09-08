@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
+using Newtonsoft.Json;
 using StockMap.Models;
 
 namespace StockMap.Controllers
@@ -23,15 +24,15 @@ namespace StockMap.Controllers
         public async Task<ActionResult> Index()
         {
             var userAccount = Session["account"].ToString();
-
             DateTime localDate = DateTime.UtcNow;
-            if(localDate.Hour > 9 && localDate.Hour < 14)
+
+            List<Stock> stocks = new List<Stock>();
+            if (localDate.Hour > 1 && localDate.Hour < 6)
             {
                 string[] favoriteStock = db.Favorites.Where(m => m.UserAccount == userAccount).Select(m => m.StockId).ToList().ToArray();
                 DateTime[] stockUpdate = db.Favorites.Include(f => f.Stock).Where(m => m.UserAccount == userAccount).Select(m => m.Stock.UpdateTime).ToList().ToArray();
                 List<string> searchStockId = new List<string>();
                 string searchId = "";
-
 
                 for (int i = 0; i < favoriteStock.Length; i++)
                 {
@@ -42,24 +43,27 @@ namespace StockMap.Controllers
                 {
                     searchId += (i == searchStockId.Count - 1) ? searchStockId.ElementAt(i) : searchStockId.ElementAt(i) + "&stock_id=";
                 }
+
                 try
                 {
                     string targetURL = "http://localhost:5000/api/v1/stock?stock_id=" + searchId;
                     HttpClient client = new HttpClient();
                     client.MaxResponseContentBufferSize = Int32.MaxValue;
                     var response = await client.GetStringAsync(targetURL);
+                    stocks = JsonConvert.DeserializeObject<IEnumerable<Stock>>(response).ToList();
                 }
                 catch (HttpRequestException e)
                 {
                     Console.WriteLine(e.ToString());
+                    stocks = db.Favorites.Include(f => f.Stock).Where(m => m.UserAccount == userAccount).Select(m => m.Stock).ToList();
                 }
-            } 
+            }
 
             var favorites = db.Favorites
                 .Include(f => f.Stock)
-                .Include(f => f.User)
                 .Where(m => m.UserAccount == userAccount)
                 .ToList();
+            foreach(var favorite in favorites) { favorite.Stock = stocks.Find(m => m.StockId == favorite.StockId); }
             var model = new Favorite() { FavoriteIndex = favorites };
             return View(model);
         }
