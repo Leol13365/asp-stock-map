@@ -99,18 +99,15 @@ namespace StockMap.Controllers
             Array.Reverse(tenMA);
             Array.Reverse(twentyMA);
             ViewBag.Cross = "";
-            if (fiveMA[0] < twentyMA[0])
+            for(int i = 1; i < fiveMA.Length;i++)
             {
-                for (int i = 1; i < 10; i++)
-                {
-                    if (fiveMA[i] > twentyMA[i]) { ViewBag.Cross = dates[i - 1] + "~" + dates[i] + "出現黃金交叉"; break; }
+                if (fiveMA[i - 1] > twentyMA[i - 1] && fiveMA[i] < twentyMA[i]) 
+                { 
+                    ViewBag.Cross += dates[i - 1] +"~" + dates[i] + "出現死亡交叉。"; 
                 }
-            }
-            else if (fiveMA[0] > twentyMA[0])
-            {
-                for (int i = 1; i < 10; i++)
-                {
-                    if (fiveMA[i] < twentyMA[i]) { ViewBag.Cross = "出現死亡交叉"; break; }
+                if (fiveMA[i - 1] < twentyMA[i - 1] && fiveMA[i] > twentyMA[i]) 
+                { 
+                    ViewBag.Cross += dates[i - 1] + "~" + dates[i] + "出現黃金交叉。"; 
                 }
             }
 
