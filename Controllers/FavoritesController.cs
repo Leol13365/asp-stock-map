@@ -26,7 +26,7 @@ namespace StockMap.Controllers
             var userAccount = Session["account"].ToString();
             DateTime localDate = DateTime.UtcNow;
 
-            List<Stock> stocks = new List<Stock>();
+            List<Stock> stocks = db.Favorites.Include(f => f.Stock).Where(m => m.UserAccount == userAccount).Select(m => m.Stock).ToList();
             if (localDate.Hour > 1 && localDate.Hour < 6)
             {
                 string[] favoriteStock = db.Favorites.Where(m => m.UserAccount == userAccount).Select(m => m.StockId).ToList().ToArray();
@@ -55,7 +55,6 @@ namespace StockMap.Controllers
                 catch (HttpRequestException e)
                 {
                     Console.WriteLine(e.ToString());
-                    stocks = db.Favorites.Include(f => f.Stock).Where(m => m.UserAccount == userAccount).Select(m => m.Stock).ToList();
                 }
             }
 

@@ -36,7 +36,7 @@ namespace StockMap.Controllers
             DateTime localDate = DateTime.UtcNow;
             DateTime stockUpdate = db.Stocks.Find(searchId).UpdateTime;
             System.TimeSpan between = localDate.Subtract(stockUpdate);
-            Stock stock = new Stock();
+            Stock stock = db.Stocks.Find(searchId);
             if (between.TotalMinutes > 1 && localDate.Hour > 1 && localDate.Hour < 6)
             {
                 try
@@ -51,7 +51,6 @@ namespace StockMap.Controllers
                 catch (HttpRequestException e)
                 {
                     Console.WriteLine(e.ToString());
-                    stock = db.Stocks.Find(searchId);
                 }
             }
 
