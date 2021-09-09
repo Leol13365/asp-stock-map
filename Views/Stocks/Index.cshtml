@@ -1,4 +1,4 @@
-@model StockMap.Models.Stock
+﻿@model StockMap.Models.Stock
 
 @{
     ViewBag.Title = "Index";
@@ -147,7 +147,20 @@
 
 <style>
     dl {
-        font-size: 30px;
-        
+        font-size: 24px;
+    }
+
+    .dl-horizontal dt {
+        width: 200px;
+        margin-right: 20px;
+        text-align: left;
+    }
+
+    .dl-horizontal dt:nth-child(even) {
+        background-color: lightgray;
+    }
+
+    dd:nth-child(odd) {
+        background-color: lightgray;
     }
 </style>
