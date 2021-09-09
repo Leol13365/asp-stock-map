@@ -64,7 +64,7 @@ namespace StockMap.Controllers
                 .Where(m => m.UserAccount == userAccount)
                 .ToList();
             foreach(var favorite in favorites) {
-                favorite.Stock = stocks.Find(m => m.StockId == favorite.StockId);
+                if(stocks.Exists(m => m.StockId == favorite.StockId)) { favorite.Stock = stocks.Find(m => m.StockId == favorite.StockId); }
                 favorite.Stock.UpdateTime = favorite.Stock.UpdateTime.AddHours(8);
             }
             var model = new Favorite() { FavoriteIndex = favorites };
