@@ -19,7 +19,12 @@ namespace StockMap.Controllers
         public ActionResult Index()
         {
             var stockYesterdays = db.StockYesterdays.Include(s => s.Stock);
+            foreach(var stockYesterday in stockYesterdays)
+            {
+                stockYesterday.StockDate = stockYesterday.StockDate.AddDays(1).AddHours(23).AddMinutes(59).AddSeconds(59);
+            }
             stockYesterdays = stockYesterdays.OrderByDescending(s => s.Volumn);
+
             return View(stockYesterdays.ToPagedList(1, 10));
         }
 
